@@ -15,7 +15,7 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Cobalt.xaml" />
 
                 <ResourceDictionary>
-                    <Style x:Key="ZetrisWindow" TargetType="Controls:MetroWindow">
+                    <Style x:Key="RecorderWindow" TargetType="Controls:MetroWindow">
                         <Setter Property="TitleCharacterCasing" Value="Normal" />
                         <Setter Property="ResizeMode" Value="NoResize" />
                         <Setter Property="BorderThickness" Value="0" />
