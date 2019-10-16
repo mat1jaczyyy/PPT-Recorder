@@ -79,8 +79,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Binary.cs" />
     <Compile Include="Bot.cs" />
     <Compile Include="GameHelper.cs" />
+    <Compile Include="Preferences.cs" />
     <Compile Include="UI.xaml.cs">
       <DependentUpon>UI.xaml</DependentUpon>
     </Compile>
