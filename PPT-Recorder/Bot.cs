@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 using ScpDriverInterface;
@@ -55,6 +56,8 @@ namespace Recorder {
                 }
 
                 updateUI();
+
+                Thread.Sleep(30); // We don't need high precision, might as well not rape CPU
             }
 
             Disposed = true;
