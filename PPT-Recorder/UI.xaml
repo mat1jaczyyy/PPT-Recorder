@@ -4,7 +4,7 @@
                       xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
                       xmlns:Recorder="clr-namespace:Recorder"
                       Style="{StaticResource RecorderWindow}"
-                      Title="Zetris" WindowStartupLocation="CenterScreen" Width="200">
+                      Title="PPT-Recorder" WindowStartupLocation="CenterScreen" Width="220">
 
     <StackPanel Margin="15 10">
         <StackPanel HorizontalAlignment="Center">
@@ -14,6 +14,14 @@
         </StackPanel>
 
         <TextBlock Margin="0 5" Foreground="#707070" x:Name="JobsHeader" />
+
+        <Border Margin="0 0 0 5" BorderBrush="#202020" Height="1" BorderThickness="0 0 0 1" />
+
+        <CheckBox Margin="0 0 0 5" IsChecked="False" x:Name="PlayerInfo" Click="PlayerInfoChanged" />
+
+        <CheckBox Margin="0 0 0 5" IsChecked="False" x:Name="ReplaySelect" Click="ReplaySelectChanged" />
+
+        <CheckBox Margin="0 0 0 5" IsChecked="False" x:Name="EndingMenu" Click="EndingMenuChanged" />
 
         <Border Margin="0 0 0 5" BorderBrush="#202020" Height="1" BorderThickness="0 0 0 1" />
 

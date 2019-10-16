@@ -1,14 +1,21 @@
 ﻿using System.Globalization;
 using System.Reflection;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace Recorder {
     public partial class UI {
+        static bool FreezeEvents = true;
+
         static string InactiveString, ActiveString, StartString, StopString;
 
         public UI() {
             InitializeComponent();
+
+            FreezeEvents = false;
+
+            PlayerInfo.IsChecked = Preferences.PlayerInfo;
+            ReplaySelect.IsChecked = Preferences.ReplaySelect;
+            EndingMenu.IsChecked = Preferences.EndingMenu;
 
             Version.Text = $"PPT-Recorder-{Assembly.GetExecutingAssembly().GetName().Version.Minor}";
 
@@ -17,24 +24,33 @@ namespace Recorder {
                     InactiveString = "비활성화";
                     ActiveString = "활성화";
                     JobsHeader.Text = "";
+                    PlayerInfo.Content = "";
+                    ReplaySelect.Content = "";
+                    EndingMenu.Content = "";
                     StartString = "";
                     StopString = "";
                     Gamepad.Content = "게임패드 연결";
                     break;
-                    
+
                 case "ja":
                     InactiveString = "停止";
                     ActiveString = "動作中";
                     JobsHeader.Text = "";
+                    PlayerInfo.Content = "";
+                    ReplaySelect.Content = "";
+                    EndingMenu.Content = "";
                     StartString = "";
                     StopString = "";
                     Gamepad.Content = "コントローラー接続中";
                     break;
-                    
+
                 default:
                     InactiveString = "Inactive";
                     ActiveString = "Active";
                     JobsHeader.Text = "Recording Jobs";
+                    PlayerInfo.Content = "Display Player Information";
+                    ReplaySelect.Content = "Include Replay Select Screen";
+                    EndingMenu.Content = "Include Ending Menu";
                     StartString = "Start";
                     StopString = "Stop";
                     Gamepad.Content = "Gamepad Connected";
@@ -58,16 +74,29 @@ namespace Recorder {
         }
 
         void UpdateActive() {
-            State.Text = Active? ActiveString : InactiveString;
-            Trigger.Content = Active? StopString : StartString;
+            State.Text = Active ? ActiveString : InactiveString;
+            Trigger.Content = Active ? StopString : StartString;
             Gamepad.IsEnabled = !Active;
+        }
+
+        void PlayerInfoChanged(object sender, RoutedEventArgs e) {
+            if (!FreezeEvents) Preferences.PlayerInfo = PlayerInfo.IsChecked == true;
+        }
+
+        void ReplaySelectChanged(object sender, RoutedEventArgs e) {
+            if (!FreezeEvents) Preferences.ReplaySelect = ReplaySelect.IsChecked == true;
+        }
+
+        void EndingMenuChanged(object sender, RoutedEventArgs e) {
+            if (!FreezeEvents) Preferences.EndingMenu = EndingMenu.IsChecked == true;
         }
 
         void TriggerClicked(object sender, RoutedEventArgs e) {
 
         }
 
-        void GamepadChanged(object sender, RoutedEventArgs e) 
-            => Bot.SetGamepad(Gamepad.IsChecked == true);
+        void GamepadChanged(object sender, RoutedEventArgs e) {
+            if (!FreezeEvents) Bot.SetGamepad(Gamepad.IsChecked == true);
+        }
     }
 }
