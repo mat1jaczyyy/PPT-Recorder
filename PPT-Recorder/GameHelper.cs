@@ -64,5 +64,9 @@ namespace Recorder {
         public static int getMenuFrameCount() => Game.ReadInt32(new IntPtr(
             0x140461B7C
         ));
+
+        public static int getReplayCount() => Game.ReadInt32(new IntPtr(
+            0x140574A4C
+        ));
     }
 }
