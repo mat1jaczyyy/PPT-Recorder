@@ -1,0 +1,10 @@
+﻿<UserControl x:Class="Recorder.AddButton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Canvas HorizontalAlignment="Stretch" Width="12" Height="12" Background="Transparent" Cursor="Hand" ClipToBounds="True"
+            MouseEnter="Enter" MouseLeave="Leave" MouseDown="Down" MouseUp="Up">
+        <Path StrokeThickness="2" x:Name="Path"
+              Data="M 0,6 L 12,6 M 6,0 L 6,12" />
+    </Canvas>
+</UserControl>
