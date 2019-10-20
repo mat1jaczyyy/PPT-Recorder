@@ -82,6 +82,7 @@
     <Compile Include="Binary.cs" />
     <Compile Include="Bot.cs" />
     <Compile Include="GameHelper.cs" />
+    <Compile Include="Job.cs" />
     <Compile Include="Preferences.cs" />
     <Compile Include="UI.xaml.cs">
       <DependentUpon>UI.xaml</DependentUpon>
