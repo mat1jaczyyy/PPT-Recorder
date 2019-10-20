@@ -15,6 +15,12 @@
 
         <TextBlock Margin="0 5" Foreground="#707070" x:Name="JobsHeader" />
 
+        <StackPanel x:Name="JobEntries">
+            <Recorder:JobEntry Margin="0 0 0 5" />
+        </StackPanel>
+
+        <Recorder:AddButton Margin="0 0 0 7" />
+
         <Border Margin="0 0 0 5" BorderBrush="#202020" Height="1" BorderThickness="0 0 0 1" />
 
         <CheckBox Margin="0 0 0 5" IsChecked="False" x:Name="PlayerInfo" Click="PlayerInfoChanged" />
@@ -27,7 +33,7 @@
 
         <CheckBox Margin="0 0 0 5" IsChecked="True" x:Name="Gamepad" Click="GamepadChanged" />
 
-        <Button Margin="0 0 0 5" Style="{StaticResource SquareButtonStyle}" BorderBrush="#DCDCDC" Controls:ButtonHelper.PreserveTextCase="True" x:Name="Trigger" Click="TriggerClicked" />
+        <Button Margin="0 0 0 5" Style="{StaticResource SquareButtonStyle}" BorderBrush="#DCDCDC" Controls:ButtonHelper.PreserveTextCase="True" IsEnabled="False" x:Name="Trigger" Click="TriggerClicked" />
 
         <Border Margin="0 0 0 5" BorderBrush="#202020" Height="1" BorderThickness="0 0 0 1" />
         

@@ -1,15 +1,20 @@
 ﻿using System.Globalization;
+using System.Linq;
 using System.Reflection;
 using System.Windows;
 
 namespace Recorder {
     public partial class UI {
+        public static UI Window { get; private set; }
+
         static bool FreezeEvents = true;
 
         static string InactiveString, ActiveString, StartString, StopString;
 
         public UI() {
             InitializeComponent();
+
+            Window = this;
 
             FreezeEvents = false;
 
@@ -58,7 +63,7 @@ namespace Recorder {
             }
 
             UpdateActive();
-            Bot.Start(this);
+            Bot.Start();
         }
 
         bool _active = false;
@@ -74,9 +79,21 @@ namespace Recorder {
         }
 
         void UpdateActive() {
-            State.Text = Active ? ActiveString : InactiveString;
-            Trigger.Content = Active ? StopString : StartString;
+            State.Text = Active? ActiveString : InactiveString;
+            Trigger.Content = Active? StopString : StartString;
             Gamepad.IsEnabled = !Active;
+        }
+
+        public void RefreshJobs() {
+            bool invalid = false;
+
+            foreach (JobEntry entry in JobEntries.Children.OfType<JobEntry>()) {
+                entry.Revalidate();
+
+                invalid |= !entry.IsValid;
+            }
+
+            Trigger.IsEnabled = !invalid;
         }
 
         void PlayerInfoChanged(object sender, RoutedEventArgs e) {

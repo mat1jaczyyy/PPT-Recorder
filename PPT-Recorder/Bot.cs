@@ -5,8 +5,6 @@ using ScpDriverInterface;
 
 namespace Recorder {
     public static class Bot {
-        static UI Window = null;
-
         static int gamepadIndex = 4;
         static ScpBus scp = new ScpBus();
         static X360Controller gamepad = new X360Controller();
@@ -33,8 +31,10 @@ namespace Recorder {
         }
 
         static void updateUI() {
-            if (Window != null)
-                Window.Active = false;
+            if (UI.Window == null) return;
+
+            UI.Window.Active = false;
+            UI.Window.RefreshJobs();
         }
 
         static void Loop() {
@@ -61,10 +61,8 @@ namespace Recorder {
 
         public static bool Started { get; private set; } = false;
 
-        public static void Start(UI window) {
+        public static void Start() {
             if (Started) return;
-
-            Window = window;
 
             scp.UnplugAll();
 
