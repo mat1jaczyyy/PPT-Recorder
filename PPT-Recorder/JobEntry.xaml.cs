@@ -25,9 +25,7 @@ namespace Recorder {
         void InputChanged(object sender, TextChangedEventArgs e) {
             Revalidate();
 
-            if (UI.Window == null) return;
-
-            UI.Window.RefreshJobs();
+            UI.Window.RefreshJobs(false);
         }
     }
 }

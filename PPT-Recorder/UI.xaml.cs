@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
 using System.Windows;
 
 namespace Recorder {
@@ -84,11 +85,16 @@ namespace Recorder {
             Gamepad.IsEnabled = !Active;
         }
 
-        public void RefreshJobs() {
+        public void RefreshJobs(bool revalidate) {
+            if (Thread.CurrentThread != Dispatcher.Thread) {
+                Dispatcher.InvokeAsync(() => RefreshJobs(revalidate));
+                return;
+            }
+
             bool invalid = false;
 
             foreach (JobEntry entry in JobEntries.Children.OfType<JobEntry>()) {
-                entry.Revalidate();
+                if (revalidate) entry.Revalidate();
 
                 invalid |= !entry.IsValid;
             }

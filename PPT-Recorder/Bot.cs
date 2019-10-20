@@ -34,7 +34,7 @@ namespace Recorder {
             if (UI.Window == null) return;
 
             UI.Window.Active = false;
-            UI.Window.RefreshJobs();
+            UI.Window.RefreshJobs(true);
         }
 
         static void Loop() {

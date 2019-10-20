@@ -8,11 +8,14 @@ namespace Recorder {
         List<int> _replays = new List<int>();
         ReadOnlyCollection<int> Replays => _replays.AsReadOnly();
 
-        public void Add(int index) {
-            if (index < 1 || GameHelper.getReplayCount() < index)
-                throw new ArgumentOutOfRangeException();
+        static bool Inbounds(int index) => 1 <= index && index <= GameHelper.getReplayCount();
+
+        public bool Add(int index) {
+            if (!Inbounds(index))
+                return false;
 
             _replays.Add(index - 1);
+            return true;
         }
 
         public static bool TryParse(string job, out Job result) {
@@ -22,13 +25,13 @@ namespace Recorder {
                 foreach (string single in job.Replace(" ", "").Split(','))
                     switch (single.Count(i => i == '-')) {
                         case 0:
-                            result.Add(int.Parse(single));
+                            if (!int.TryParse(single, out int x) || !result.Add(x)) return false;
                             break;
 
                         case 1:
                             string[] interval = single.Split('-');
-                            int start = int.Parse(interval[0]);
-                            int end = int.Parse(interval[1]);
+                            if (!int.TryParse(interval[0], out int start) || !Inbounds(start)) return false;
+                            if (!int.TryParse(interval[1], out int end) || !Inbounds(end)) return false;
                             int step = (start > end)? -1 : 1;
 
                             for (int i = start; i != end; i += step)
@@ -41,7 +44,6 @@ namespace Recorder {
                     }
 
             } catch {
-                result = null;
                 return false;
             }
 
